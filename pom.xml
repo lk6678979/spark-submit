@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lk</groupId>
+    <artifactId>spark-submit</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+
+    <!-- 继承springboot项目-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <!-- base -->
+        <com.sziov.common-utils.version>2.4.0</com.sziov.common-utils.version>
+        <com.sziov.redis-utils.version>1.2.1</com.sziov.redis-utils.version>
+        <com.sziov.swagger-utils.version>1.0.0</com.sziov.swagger-utils.version>
+        <com.sziov.nev.date-base.version>1.0.0</com.sziov.nev.date-base.version>
+        <com.sziov.nev.date-collection.version>1.0.0</com.sziov.nev.date-collection.version>
+        <com.sziov.nev.date-synchro.version>1.0.0</com.sziov.nev.date-synchro.version>
+        <com.sziov.hdfs-utils.version>1.0.0</com.sziov.hdfs-utils.version>
+        <tsp-gatbox-decode.version>1.0.1</tsp-gatbox-decode.version>
+
+        <!-- spark相关-->
+        <spark.version>2.3.3</spark.version>
+        <spark.streaming.kafka.version>2.3.3</spark.streaming.kafka.version>
+        <scala.version>2.11.8</scala.version>
+        <hadoop.version>2.6.4</hadoop.version>
+        <hive.version>1.1</hive.version>
+        <hbase.version>1.2.6</hbase.version>
+        <log4j.version>1.2.17</log4j.version>
+        <!--<kafka.version>0.10.1.0</kafka.version>-->
+
+        <com.sziov.redis-utils.version>1.2.1</com.sziov.redis-utils.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <!-- springboot基础包 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <!--&lt;!&ndash; springboot的web项目依赖jar&ndash;&gt;-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- springboot的测试依赖jar-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- spark基础包 开始-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- spark基础包 结束-->
+        <!-- log -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sziov</groupId>
+            <artifactId>swagger-utils</artifactId>
+            <version>${com.sziov.swagger-utils.version}</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.google.code.gson</groupId>-->
+        <!--<artifactId>gson</artifactId>-->
+        <!--<version>${gson.version}</version>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <!-- 运行配置-->
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <env>local</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <env>test</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>pro</id>
+            <properties>
+                <env>pro</env>
+            </properties>
+        </profile>
+    </profiles>
+</project>

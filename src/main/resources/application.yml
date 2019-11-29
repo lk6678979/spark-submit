@@ -1,0 +1,7 @@
+server:
+  port: 7777
+spring:
+  profiles:
+    active: @env@
+  application:
+    name: spark-submit

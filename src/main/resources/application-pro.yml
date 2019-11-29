@@ -1,0 +1,30 @@
+logging:
+  config: classpath:logback-spring-local.xml
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+swagger:
+  show: 1
+  basePackage: com.sziov
+  gitUrl: http://192.168.0.89/gac-nev-monitor-center/nev-monitor-center.git
+spark:
+  javaHome: /usr/local/jdk1.8.0_131
+  sparkHome: /opt/cloudera/parcels/SPARK2-2.3.0.cloudera3-1.cdh5.13.3.p0.458809/lib/spark2
+  business:
+    exportSign:
+      jarPath:  /data/spark/business/jar/exporting-historical-data/exporting-historical-data-1.0.0.jar
+      mainClass: com.sziov.SparkApplication
+      master: yarn
+      deployMode: cluster
+      appName: exportSign
+      queue: exportSign
+      driverMemory: 4g
+    gbExportSign:
+      jarPath:  /data/spark/business/jar/exporting-historical-data/exporting-historical-data-1.0.0.jar
+      mainClass: com.sziov.SparkApplication
+      master: yarn
+      deployMode: cluster
+      appName: gbExportSign
+      queue: gbExportSign
+      driverMemory: 4g
